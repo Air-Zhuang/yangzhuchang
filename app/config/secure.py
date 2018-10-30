@@ -1,0 +1,4 @@
+SQLALCHEMY_DATABASE_URI='mysql+cymysql://root:123456@127.0.0.1:3306/yangzhuchang'
+
+SECRET_KEY='xxxxxx'
+TOKEN_EXPIRATION=30*24*3600

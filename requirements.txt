@@ -1,0 +1,8 @@
+flask
+cymysql
+Flask-Cors
+Flask-HTTPAuth
+Flask-SQLAlchemy
+Flask-WTF
+requests
+flask-cors
