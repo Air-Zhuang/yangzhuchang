@@ -2,7 +2,7 @@ from flask import jsonify
 
 from app.libs.redprint import Redprint
 from app.validators.forms import GetPicForm
-from app.libs.error_code import ParameterException
+from app.libs.error_code import parameter_exception
 
 from app.models.base import db
 from app.models.aiyouwu import Aiyouwu
@@ -22,10 +22,8 @@ api=Redprint('pic')
 def get_pic(kind):
     resp = {"value": []}
     form=GetPicForm().validate_for_api()
-    try:
+    with parameter_exception():
         piclist = eval(kind+".query.filter_by(title='" + form.title.data + "').all()")
         resp["value"]=piclist
         return jsonify(resp)
-    except Exception as e:
-        raise ParameterException
 

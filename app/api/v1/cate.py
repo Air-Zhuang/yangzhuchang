@@ -1,6 +1,6 @@
 from flask import jsonify
 
-from app.libs.error_code import ParameterException
+from app.libs.error_code import parameter_exception
 from app.libs.redprint import Redprint
 from app.models.cate import Cate
 from app.validators.forms import CateListForm
@@ -30,9 +30,7 @@ def get_cate():
 def get_cate_list():
     resp = {"value": []}
     form=CateListForm().validate_for_api()                      #form.kind.data为查询参数
-    try:
+    with parameter_exception():
         catelist = eval("db.session.query("+form.kind.data+".title).filter("+form.kind.data+".status == 1).distinct().all()")
         resp["value"]=[i[0] for i in catelist]                      #多个list合并成一个list
         return jsonify(resp)
-    except Exception as e:
-        raise ParameterException

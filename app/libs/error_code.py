@@ -1,4 +1,5 @@
 from app.libs.error import APIException
+from contextlib import contextmanager
 
 
 class Success(APIException):
@@ -45,3 +46,10 @@ class DuplicateGift(APIException):
     code = 400
     error_code = 2001
     msg = 'the current book has already in gift'
+
+@contextmanager
+def parameter_exception():
+    try:
+        yield
+    except Exception as e:
+        raise ParameterException
